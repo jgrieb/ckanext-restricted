@@ -155,19 +155,12 @@ def restricted_allowed_user_mail_body(user, resource):
 
 def restricted_notify_allowed_users(previous_value, updated_resource):
 
-    def _safe_json_loads(json_string, default={}):
-        try:
-            return json.loads(json_string)
-        except Exception:
-            return default
 
-    previous_restricted = _safe_json_loads(previous_value)
-    updated_restricted = _safe_json_loads(updated_resource.get('restricted', ''))
+    updated_restricted = updated_resource.get('restricted_allowed_users', '')
 
     # compare restricted users_allowed values
-    updated_allowed_users = set(updated_restricted.get('allowed_users', '').split(','))
-    if updated_allowed_users:
-        previous_allowed_users = previous_restricted.get('allowed_users', '').split(',')
-        for user_id in updated_allowed_users:
-            if user_id not in previous_allowed_users:
-                restricted_mail_allowed_user(user_id, updated_resource)
+    updated_allowed_users = set(updated_restricted.split(','))
+    previous_allowed_users = previous_value.split(',')
+    for user_id in updated_allowed_users:
+        if user_id not in previous_allowed_users:
+            restricted_mail_allowed_user(user_id, updated_resource)
