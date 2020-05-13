@@ -1,0 +1,17 @@
+{% trans %}The following access request on {{ site_title }} has been received:{% endtrans %}
+* {% trans %}Resource:{% endtrans %} {{ resource_name }} ({{ resource_link }})
+* {% trans %}Dataset:{% endtrans %} {{ package_name }}
+* {% trans %}User:{% endtrans %} {{ user_name }} ({{ user_email }})
+* {% trans %}Message:{% endtrans %} {{ message }}
+
+{% trans %}We will process it as soon as possible.{% endtrans %}
+{% trans %}If you have any further question about this request, please contact the {{ site_title }} support at {{ admin_email_to }}.{% endtrans %}
+
+{% trans %}Best regards,{% endtrans %}
+{% trans %}{{ site_title }} Administrator{% endtrans %}
+
+
+{% trans %}This is an automatically generated e-mail, please do not reply to it.{% endtrans %}
+
+{% trans %}Message sent from {{ site_title }} ({{ site_url }}){% endtrans %}
+

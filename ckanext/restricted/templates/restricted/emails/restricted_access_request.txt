@@ -1,4 +1,4 @@
-{% trans %}Dear{% endtrans %} {{ maintainer_name }},
+{% trans %}Dear{% endtrans %} {{ receiver_name }},
 
 {% trans %}A user has requested access to your data in {{ site_title }}:{% endtrans %}
 * {% trans %}Resource:{% endtrans %} {{ resource_name }} ({{ resource_link }})

@@ -1,15 +1,15 @@
 # Translations template for ckanext-restricted.
-# Copyright (C) 2018 ORGANIZATION
+# Copyright (C) 2020 ORGANIZATION
 # This file is distributed under the same license as the ckanext-restricted
 # project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-restricted 0.0.4\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-08-01 11:22+0200\n"
+"POT-Creation-Date: 2020-05-13 16:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,88 +18,93 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: ckanext/restricted/action.py:49
+#: ckanext/restricted/action.py:50
 msgid "CKAN System Administrator"
 msgstr ""
 
-#: ckanext/restricted/action.py:54
+#: ckanext/restricted/action.py:55
 msgid "New Registration: {0} ({1})"
 msgstr ""
 
-#: ckanext/restricted/action.py:55
+#: ckanext/restricted/action.py:56
 msgid "new user"
 msgstr ""
 
-#: ckanext/restricted/controller.py:45 ckanext/restricted/controller.py:130
+#: ckanext/restricted/controller.py:45 ckanext/restricted/controller.py:126
 msgid "Not authorized to see this page"
 msgstr ""
 
-#: ckanext/restricted/controller.py:80
+#: ckanext/restricted/controller.py:77
 msgid "Access Request to resource {0} ({1}) from {2}"
 msgstr ""
 
-#: ckanext/restricted/controller.py:106
-msgid ""
-"Please find below a copy of the access request mail sent. \n"
-"\n"
-" >> {}"
-msgstr ""
-
-#: ckanext/restricted/controller.py:132
+#: ckanext/restricted/controller.py:128
 msgid "Bad Captcha. Please try again."
 msgstr ""
 
-#: ckanext/restricted/controller.py:144 ckanext/restricted/controller.py:215
+#: ckanext/restricted/controller.py:140 ckanext/restricted/controller.py:211
 msgid "Dataset not found"
 msgstr ""
 
-#: ckanext/restricted/controller.py:146
+#: ckanext/restricted/controller.py:142
 msgid "Exception retrieving dataset to send mail"
 msgstr ""
 
-#: ckanext/restricted/controller.py:153
+#: ckanext/restricted/controller.py:149
 msgid "Missing Value"
 msgstr ""
 
-#: ckanext/restricted/controller.py:177
+#: ckanext/restricted/controller.py:173
 msgid "Access request form is available to logged in users only."
 msgstr ""
 
-#: ckanext/restricted/controller.py:218
+#: ckanext/restricted/controller.py:214
 msgid "Exception retrieving dataset for the form ({})"
 msgstr ""
 
-#: ckanext/restricted/controller.py:220
+#: ckanext/restricted/controller.py:216
 msgid "Unknown exception retrieving dataset for the form"
 msgstr ""
 
-#: ckanext/restricted/logic.py:140
+#: ckanext/restricted/logic.py:130
 msgid "Access granted to resource {}"
 msgstr ""
 
-#: ckanext/restricted/templates/package/snippets/resource_item.html:14
+#: ckanext/restricted/templates/package/snippets/resource_form.html:8
+msgid "Restriction"
+msgstr ""
+
+#: ckanext/restricted/templates/package/snippets/resource_form.html:20
+msgid "Allowed users"
+msgstr ""
+
+#: ckanext/restricted/templates/package/snippets/resource_form.html:20
+msgid "Specific users who can access resources"
+msgstr ""
+
+#: ckanext/restricted/templates/package/snippets/resource_item.html:15
 msgid "Unauthorized"
 msgstr ""
 
-#: ckanext/restricted/templates/package/snippets/resource_item.html:24
+#: ckanext/restricted/templates/package/snippets/resource_item.html:25
 #: ckanext/restricted/templates/restricted/restricted_request_access_base.html:3
 #: ckanext/restricted/templates/restricted/restricted_request_access_base.html:15
 msgid "Request Access"
 msgstr ""
 
-#: ckanext/restricted/templates/package/snippets/resource_item.html:30
+#: ckanext/restricted/templates/package/snippets/resource_item.html:31
 msgid "Log in"
 msgstr ""
 
-#: ckanext/restricted/templates/package/snippets/resource_item.html:30
+#: ckanext/restricted/templates/package/snippets/resource_item.html:31
 msgid "or"
 msgstr ""
 
-#: ckanext/restricted/templates/package/snippets/resource_item.html:30
+#: ckanext/restricted/templates/package/snippets/resource_item.html:31
 msgid "Register"
 msgstr ""
 
-#: ckanext/restricted/templates/package/snippets/resource_item.html:30
+#: ckanext/restricted/templates/package/snippets/resource_item.html:31
 msgid "to access resource"
 msgstr ""
 
@@ -190,6 +195,7 @@ msgid "Access Request Data"
 msgstr ""
 
 #: ckanext/restricted/templates/restricted/emails/restricted_access_request.txt:6
+#: ckanext/restricted/templates/restricted/emails/restricted_access_request_usercopy.txt:4
 #: ckanext/restricted/templates/restricted/restricted_request_access_result.html:15
 msgid "User:"
 msgstr ""
@@ -199,11 +205,13 @@ msgid "User Mail:"
 msgstr ""
 
 #: ckanext/restricted/templates/restricted/emails/restricted_access_request.txt:5
+#: ckanext/restricted/templates/restricted/emails/restricted_access_request_usercopy.txt:3
 #: ckanext/restricted/templates/restricted/restricted_request_access_result.html:17
 msgid "Dataset:"
 msgstr ""
 
 #: ckanext/restricted/templates/restricted/emails/restricted_access_request.txt:4
+#: ckanext/restricted/templates/restricted/emails/restricted_access_request_usercopy.txt:2
 #: ckanext/restricted/templates/restricted/restricted_request_access_result.html:18
 msgid "Resource:"
 msgstr ""
@@ -213,6 +221,7 @@ msgid "Contact Email:"
 msgstr ""
 
 #: ckanext/restricted/templates/restricted/emails/restricted_access_request.txt:7
+#: ckanext/restricted/templates/restricted/emails/restricted_access_request_usercopy.txt:5
 #: ckanext/restricted/templates/restricted/restricted_request_access_result.html:20
 msgid "Message:"
 msgstr ""
@@ -254,12 +263,14 @@ msgid ""
 msgstr ""
 
 #: ckanext/restricted/templates/restricted/emails/restricted_access_request.txt:13
+#: ckanext/restricted/templates/restricted/emails/restricted_access_request_usercopy.txt:10
 #: ckanext/restricted/templates/restricted/emails/restricted_user_allowed.txt:8
 #: ckanext/restricted/templates/restricted/emails/restricted_user_registered.txt:6
 msgid "Best regards,"
 msgstr ""
 
 #: ckanext/restricted/templates/restricted/emails/restricted_access_request.txt:14
+#: ckanext/restricted/templates/restricted/emails/restricted_access_request_usercopy.txt:11
 #: ckanext/restricted/templates/restricted/emails/restricted_user_allowed.txt:9
 #: ckanext/restricted/templates/restricted/emails/restricted_user_registered.txt:7
 #, python-format
@@ -267,16 +278,34 @@ msgid "%(site_title)s Administrator"
 msgstr ""
 
 #: ckanext/restricted/templates/restricted/emails/restricted_access_request.txt:17
+#: ckanext/restricted/templates/restricted/emails/restricted_access_request_usercopy.txt:14
 #: ckanext/restricted/templates/restricted/emails/restricted_user_allowed.txt:12
 #: ckanext/restricted/templates/restricted/emails/restricted_user_registered.txt:10
 msgid "This is an automatically generated e-mail, please do not reply to it."
 msgstr ""
 
 #: ckanext/restricted/templates/restricted/emails/restricted_access_request.txt:19
+#: ckanext/restricted/templates/restricted/emails/restricted_access_request_usercopy.txt:16
 #: ckanext/restricted/templates/restricted/emails/restricted_user_allowed.txt:14
 #: ckanext/restricted/templates/restricted/emails/restricted_user_registered.txt:12
 #, python-format
 msgid "Message sent from %(site_title)s (%(site_url)s)"
+msgstr ""
+
+#: ckanext/restricted/templates/restricted/emails/restricted_access_request_usercopy.txt:1
+#, python-format
+msgid "The following access request on %(site_title)s has been received:"
+msgstr ""
+
+#: ckanext/restricted/templates/restricted/emails/restricted_access_request_usercopy.txt:7
+msgid "We will process it as soon as possible."
+msgstr ""
+
+#: ckanext/restricted/templates/restricted/emails/restricted_access_request_usercopy.txt:8
+#, python-format
+msgid ""
+"If you have any further question about this request, please contact the "
+"%(site_title)s support at %(admin_email_to)s."
 msgstr ""
 
 #: ckanext/restricted/templates/restricted/emails/restricted_user_allowed.txt:3
@@ -298,3 +327,4 @@ msgstr ""
 #: ckanext/restricted/templates/restricted/emails/restricted_user_registered.txt:3
 msgid "A new user registered, please review the information:"
 msgstr ""
+

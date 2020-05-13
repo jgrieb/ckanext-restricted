@@ -63,7 +63,6 @@ class RestrictedController(toolkit.BaseController):
             extra_vars = {
                 'site_title': config.get('ckan.site_title'),
                 'site_url': config.get('ckan.site_url'),
-                'maintainer_name': data.get('maintainer_name', 'Maintainer'),
                 'user_id': data.get('user_id', 'the user id'),
                 'user_name': data.get('user_name', ''),
                 'user_email': data.get('user_email', ''),
@@ -74,7 +73,6 @@ class RestrictedController(toolkit.BaseController):
                 'message': data.get('message', ''),
                 'admin_email_to': config.get('email_to', 'email_to_undefined')}
 
-            body = render_jinja2('restricted/emails/restricted_access_request.txt', extra_vars)
             subject = \
                 _('Access Request to resource {0} ({1}) from {2}').format(
                     data.get('resource_name', ''),
@@ -82,7 +80,7 @@ class RestrictedController(toolkit.BaseController):
                     data.get('user_name', ''))
 
             email_dict = {
-                data.get('maintainer_email'): extra_vars.get('maintainer_name'),
+                data.get('maintainer_email'): data.get('maintainer_name'),
                 extra_vars.get('admin_email_to'): '{} Admin'.format(extra_vars.get('site_title'))}
 
             headers = {
@@ -91,6 +89,10 @@ class RestrictedController(toolkit.BaseController):
 
             # CC doesn't work and mailer cannot send to multiple addresses
             for email, name in email_dict.iteritems():
+                extra_vars.update({
+                    'receiver_name': name
+                })
+                body = render_jinja2('restricted/emails/restricted_access_request.txt', extra_vars)
                 mailer.mail_recipient(name, email, subject, body, headers)
 
             # Special copy for the user (no links)
@@ -99,13 +101,8 @@ class RestrictedController(toolkit.BaseController):
 
             extra_vars['resource_link'] = '[...]'
             extra_vars['resource_edit_link'] = '[...]'
-            body = render_jinja2(
-                'restricted/emails/restricted_access_request.txt', extra_vars)
-
-            body_user = _(
-                'Please find below a copy of the access '
-                'request mail sent. \n\n >> {}'
-            ).format(body.replace("\n", "\n >> "))
+            body_user = render_jinja2(
+                'restricted/emails/restricted_access_request_usercopy.txt', extra_vars)
 
             mailer.mail_recipient(
                 name, email, 'Fwd: ' + subject, body_user, headers)
