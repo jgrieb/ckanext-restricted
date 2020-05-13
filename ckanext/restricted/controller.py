@@ -120,6 +120,9 @@ class RestrictedController(toolkit.BaseController):
             data_dict = logic.clean_dict(unflatten(
                 logic.tuplize_dict(logic.parse_params(request.params))))
 
+            # for some reason, this is needed for check_recaptcha not to fail
+            # (see https://github.com/EnviDat/ckanext-restricted/issues/18)
+            request.form = request.params
             captcha.check_recaptcha(request)
 
         except logic.NotAuthorized:
