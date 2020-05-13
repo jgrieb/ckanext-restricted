@@ -232,34 +232,14 @@ class RestrictedController(toolkit.BaseController):
             extra_vars=extra_vars)
 
     def _get_contact_details(self, pkg_dict):
-        contact_email = ""
-        contact_name = ""
-        # Maintainer as Composite field
-        try:
-            contact_email = json.loads(
-                pkg_dict.get('maintainer', '{}')).get('email', '')
-            contact_name = json.loads(
-                pkg_dict.get('maintainer', '{}')).get('name', 'Dataset Maintainer')
-        except Exception:
-            pass
-        # Maintainer Directly defined
-        if not contact_email:
-            contact_email = pkg_dict.get('maintainer_email', '')
-            contact_name = pkg_dict.get('maintainer', 'Dataset Maintainer')
-        # 1st Author Directly defined
-        if not contact_email:
-            contact_email = pkg_dict.get('author_email', '')
-            contact_name = pkg_dict.get('author', '')
-        # First Author from Composite Repeating
-        if not contact_email:
-            try:
-                author = json.loads(pkg_dict.get('author'))[0]
-                contact_email = author.get('email', '')
-                contact_name = author.get('name', 'Dataset Maintainer')
-            except Exception:
-                pass
-        # CKAN instance Admin
-        if not contact_email:
-            contact_email = config.get('email_to', 'email_to_undefined')
-            contact_name = 'CKAN Admin'
+
+        # Package owner
+        context={'ignore_auth': True}
+        package = toolkit.get_action('package_show')(context, { 'id': pkg_dict['id'] })
+        context={'ignore_auth': True, 'user':package['creator_user_id']}
+        creator = toolkit.get_action('user_show')(context, { 'id': package['creator_user_id'] })
+
+        contact_email = creator.get('email', '')
+        contact_name = creator.get('display_name',  'Dataset Maintainer')
+
         return {'contact_email': contact_email, 'contact_name': contact_name}
