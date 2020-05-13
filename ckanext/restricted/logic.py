@@ -123,10 +123,14 @@ def restricted_mail_allowed_user(user_id, resource):
         # Send mail to user
         mailer.mail_recipient(user_name, user_email, mail_subject, mail_body)
 
+        mail_body_copy = _('User {} was granted access to a resource').format(user['name'])
+        mail_body_copy += '\n\n\n >> '
+        mail_body_copy += mail_body.replace('\n', '\n >> ')
+        mail_subject_copy = 'Fwd: {}'.format(mail_subject)
+
         # Send copy to admin
         mailer.mail_recipient(
-            'CKAN Admin', config.get('email_to'),
-            'Fwd: {}'.format(mail_subject), mail_body)
+            'CKAN Admin', config.get('email_to'), mail_subject_copy, mail_body_copy)
 
     except Exception as e:
         log.warning(('restricted_mail_allowed_user: '

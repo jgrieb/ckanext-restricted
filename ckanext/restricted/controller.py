@@ -105,7 +105,7 @@ class RestrictedController(toolkit.BaseController):
                 'restricted/emails/restricted_access_request_usercopy.txt', extra_vars)
 
             mailer.mail_recipient(
-                name, email, 'Fwd: ' + subject, body_user, headers)
+                name, email, subject, body_user, headers)
             success = True
 
         except mailer.MailerException as mailer_exception:
