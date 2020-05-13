@@ -1,0 +1,22 @@
+{% ckan_extends %}
+
+{% block metadata_fields %}
+
+  {{ super() }}
+
+  <div class="form-group control-full">
+    <label class="control-label" for="field-document_type">{{ _("Restriction") }}</label>
+    <div class="controls">
+      <select id="field-restricted_level" name="restricted_level" class="form-control">
+        <option value="public"{% if data.get('restricted_level') == 'public' %} selected="selected"{% endif %}>public</option>
+        <option value="registered"{% if data.get('restricted_level') == 'registered' %} selected="selected"{% endif %}>membre enregistrés</option>
+        <option value="same_organization"{% if data.get('restricted_level') == 'same_organization' %} selected="selected"{% endif %}>membre de l'organisation</option>
+        <option value="only_allowed_users"{% if data.get('restricted_level') == 'only_allowed_users' %} selected="selected"{% endif %}>personnes authorisées</option>
+      </select>
+    </div>
+  </div>
+
+  {% set tag_attrs = {'data-module': 'autocomplete', 'data-module-tags': '', 'data-module-source': '/api/2/util/user/autocomplete?q=?'} %}
+  {{ form.input('restricted_allowed_users', id='field-restricted_allowed_users', label=_('Allowed users'), placeholder=_('Specific users who can access resources'), value=data.get('restricted_allowed_users'), error=errors.tags, classes=['control-full'], attrs=tag_attrs) }}
+
+{% endblock %}

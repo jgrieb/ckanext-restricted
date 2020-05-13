@@ -25,6 +25,7 @@ class RestrictedPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IAuthFunctions)
     plugins.implements(plugins.IRoutes, inherit=True)
     plugins.implements(plugins.IResourceController, inherit=True)
+    plugins.implements(plugins.IDatasetForm, inherit=False)
 
     # IConfigurer
     def update_config(self, config_):
@@ -66,4 +67,34 @@ class RestrictedPlugin(plugins.SingletonPlugin, DefaultTranslation):
     def after_update(self, context, resource):
         previous_value = context.get('__restricted_previous_value')
         logic.restricted_notify_allowed_users(previous_value, resource)
+
+    # IDatasetForm
+    def is_fallback(self):
+        return False
+
+    def package_types(self):
+        return []
+
+    def _modify_package_schema(self, schema):
+        # Add our custom document_type metadata field to the schema.
+        schema['resources'].update({
+            'restricted_level': [toolkit.get_validator('ignore_missing'),],
+            'restricted_allowed_users': [toolkit.get_validator('ignore_missing'),],
+        })
+        return schema
+
+    def create_package_schema(self):
+        schema = super(RestrictedPlugin, self).create_package_schema()
+        schema = self._modify_package_schema(schema)
+        return schema
+
+    def update_package_schema(self):
+        schema = super(RestrictedPlugin, self).update_package_schema()
+        schema = self._modify_package_schema(schema)
+        return schema
+
+    def show_package_schema(self):
+        schema = super(RestrictedPlugin, self).show_package_schema()
+        schema = self._modify_package_schema(schema)
+        return schema
 

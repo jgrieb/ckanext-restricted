@@ -34,35 +34,13 @@ def restricted_get_username_from_context(context):
 
 
 def restricted_get_restricted_dict(resource_dict):
-    restricted_dict = {'level': 'public', 'allowed_users': []}
-
-    # the ckan plugins ckanext-scheming and ckanext-composite
-    # change the structure of the resource dict and the nature of how
-    # to access our restricted field values
-    if resource_dict:
-        # the dict might exist as a child inside the extras dict
-        extras = resource_dict.get('extras', {})
-        # or the dict might exist as a direct descendant of the resource dict
-        restricted = resource_dict.get('restricted', extras.get('restricted', {}))
-        if not isinstance(restricted, dict):
-            # if the restricted property does exist, but not as a dict,
-            # we may need to parse it as a JSON string to gain access to the values.
-            # as is the case when making composite fields
-            try:
-                restricted = json.loads(restricted)
-            except ValueError:
-                restricted = {}
-
-        if restricted:
-            restricted_level = restricted.get('level', 'public')
-            allowed_users = restricted.get('allowed_users', '')
-            if not isinstance(allowed_users, list):
-                allowed_users = allowed_users.split(',')
-            restricted_dict = {
-                'level': restricted_level,
-                'allowed_users': allowed_users}
-
-    return restricted_dict
+    restricted_level = resource_dict.get('restricted_level', 'public')
+    allowed_users = resource_dict.get('restricted_allowed_users', '')
+    if not isinstance(allowed_users, list):
+        allowed_users = allowed_users.split(',')
+    return {
+        'level': restricted_level,
+        'allowed_users': allowed_users}
 
 
 def restricted_check_user_resource_access(user, resource_dict, package_dict):
