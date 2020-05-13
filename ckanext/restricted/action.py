@@ -34,44 +34,6 @@ _get_or_bust = ckan.logic.get_or_bust
 NotFound = ckan.logic.NotFound
 
 
-def restricted_user_create_and_notify(context, data_dict):
-
-    def body_from_user_dict(user_dict):
-        body = ''
-        for key, value in user_dict.items():
-            body += '* {0}: {1}\n'.format(
-                key.upper(), value if isinstance(value, str) else str(value))
-        return body
-
-    user_dict = user_create(context, data_dict)
-
-    # Send your email, check ckan.lib.mailer for params
-    try:
-        name = _('CKAN System Administrator')
-        email = config.get('email_to')
-        if not email:
-            raise MailerException('Missing "email-to" in config')
-
-        subject = _('New Registration: {0} ({1})').format(
-            user_dict.get('name', _(u'new user')), user_dict.get('email'))
-
-        extra_vars = {
-            'site_title': config.get('ckan.site_title'),
-            'site_url': config.get('ckan.site_url'),
-            'user_info': body_from_user_dict(user_dict)}
-
-        body = render_jinja2(
-            'restricted/emails/restricted_user_registered.txt', extra_vars)
-
-        mail_recipient(name, email, subject, body)
-
-    except MailerException as mailer_exception:
-        log.error('Cannot send mail after registration')
-        log.error(mailer_exception)
-
-    return (user_dict)
-
-
 @side_effect_free
 def restricted_resource_view_list(context, data_dict):
     model = context['model']

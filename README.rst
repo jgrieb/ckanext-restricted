@@ -81,8 +81,7 @@ The resource access restriction level can be individualy defined for every packa
 
 The allowed user list is also defined in an additional field that includes autocomplete.
 
-The usage of this extension, regarding the level "any_organization", makes more sense if the CKAN administrator sets some users as members of an organization. In our case we created an organization called "trusted_users" where the mail accounts have been double checked. Therefore this extension sends a mail to the defined 'mail_to' in the CKAN config file at every new user registration. To switch off this functionality, just comment out the code at:  
-https://github.com/espona/ckanext-restricted/blob/master/ckanext/restricted/plugin.py#L14
+The usage of this extension, regarding the level "any_organization", makes more sense if the CKAN administrator sets some users as members of an organization.
 
 It is also recommended to set up the recaptcha in the config file
      # Restricted
