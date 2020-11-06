@@ -8,10 +8,10 @@
     <label class="control-label" for="field-document_type">{{ _("Restriction") }}</label>
     <div class="controls">
       <select id="field-restricted_level" name="restricted_level" class="form-control">
-        <option value="public"{% if data.get('restricted_level') == 'public' %} selected="selected"{% endif %}>public</option>
-        <option value="registered"{% if data.get('restricted_level') == 'registered' %} selected="selected"{% endif %}>membre enregistrés</option>
-        <option value="same_organization"{% if data.get('restricted_level') == 'same_organization' %} selected="selected"{% endif %}>membre de l'organisation</option>
-        <option value="only_allowed_users"{% if data.get('restricted_level') == 'only_allowed_users' %} selected="selected"{% endif %}>personnes authorisées</option>
+        <option value="public"{% if data.get('restricted_level') == 'public' %} selected="selected"{% endif %}>{{ _('Public') }}</option>
+        <option value="registered"{% if data.get('restricted_level') == 'registered' %} selected="selected"{% endif %}>{{ _('Registered members') }}</option>
+        <option value="same_organization"{% if data.get('restricted_level') == 'same_organization' %} selected="selected"{% endif %}>{{ _('Organization members') }}n</option>
+        <option value="only_allowed_users"{% if data.get('restricted_level') == 'only_allowed_users' %} selected="selected"{% endif %}>{{ _('Allowed users only') }}</option>
       </select>
     </div>
   </div>
