@@ -93,7 +93,7 @@ class RestrictedController(toolkit.BaseController):
                     'receiver_name': name
                 })
                 body = render_jinja2('restricted/emails/restricted_access_request.txt', extra_vars)
-                mailer.mail_recipient(name, email, subject, body, headers)
+                mailer.mail_recipient(name, email, subject, body, headers=headers)
 
             # Special copy for the user (no links)
             email = data.get('user_email')
