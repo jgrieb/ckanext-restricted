@@ -53,7 +53,7 @@
         <button class="btn btn-primary" type="submit" name="save"><i class="fa fa-icon fa-envelope-o"></i> {{ _('Send Request') }}</button>
       {% endblock %}
       {% block cancel_button %}
-        <a class="btn btn-danger" href="{% url_for controller='package', action='read', id=data.package_id %}" data-module="cancel-action" >{{ _('Cancel') }}</a>
+        <a class="btn btn-danger" href="{% url_for controller='dataset', action='read', id=data.package_id %}" data-module="cancel-action" >{{ _('Cancel') }}</a>
       {% endblock %}
     </div>
   {% endblock %}
