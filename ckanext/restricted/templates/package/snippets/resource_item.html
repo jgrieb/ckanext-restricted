@@ -11,7 +11,7 @@
     {{ super() }}
   {% else %}
   <span class="restricted-item">
-    <a class="heading restricted-item" disabled="true" href="#" title="{{ res.name or res.description }}">{{ h.resource_display_name(res) | truncate(35) }} {{ _('Unauthorized') }}
+    <a class="heading restricted-item" disabled="true" href="#" title="{{ res.name or res.description }}">{{ _('Unauthorized') }}
       <span class="format-label" property="dc:format" data-format="{{ res.format.lower() or 'data' }}">{{ res.format }}</span>{{ h.popular('views', res.tracking_summary.total, min=10) }}
     </a>
   </span>
@@ -30,7 +30,7 @@
   <div class="dropdown btn-group restricted-link">
     <i class="fa fa-icon fa-user"></i>
       {% block resource_item_unauthorized %}
-    <a href="{{ h.url_for(controller='user', action='login', came_from='/dataset/'+pkg.name) }}" >{{ _('Log in') }}</a> {{ _('or') }} <a href="{{ h.url_for(controller='user', action='register') }}" >{{ _('Register')}}</a> {{ _('to access resource')}}
+    <a href="{{ h.url_for(controller='user', action='login', came_from='/dataset/'+pkg.name) }}" >{{ _('Log in') }}</a> {{ _('to access resource')}}
       {% endblock %}
   </div>
     {% endif%}

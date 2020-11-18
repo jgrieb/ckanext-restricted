@@ -14,7 +14,6 @@ import ckanext.restricted.blueprints as blueprints
 from logging import getLogger
 log = getLogger(__name__)
 
-
 _get_or_bust = ckan.logic.get_or_bust
 
 
