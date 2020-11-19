@@ -177,7 +177,7 @@ def _restricted_resource_list_hide_fields(context, resource_list):
                     else:
                         allowed_users.append(user[0:3] + '*****' + user[-2:])
 
-            if isinstance(resource.get('restricted_allowed_users', None),str):
+            if 'restricted_allowed_users' in resource:
                 restricted_resource['restricted_allowed_users'] = allowed_users
 
                 # if the user is not authorized to see the resource, we hide
