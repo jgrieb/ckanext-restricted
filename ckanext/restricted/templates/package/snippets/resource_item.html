@@ -18,6 +18,13 @@
   {% endif %}
 {% endblock %}
 
+{% block resource_item_description %}
+  {% if authorized %}
+    {{ super() }}
+  {% else %}
+  {% endif %}
+{% endblock %}
+
 {% block resource_item_explore %}
   {% if authorized %}
     {{ super() }}
