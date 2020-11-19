@@ -38,11 +38,15 @@ NotFound = ckan.logic.NotFound
 def restricted_resource_view_list(context, data_dict):
     model = context['model']
     id = _get_or_bust(data_dict, 'id')
-    resource = model.Resource.get(id)
-    if not resource:
-        raise NotFound
-    authorized = auth.restricted_resource_show(
-        context, {'id': resource.get('id'), 'resource': resource}).get('success', False)
+
+    if id == '.idnotauthorized':
+        authorized = False
+    else:
+        resource = model.Resource.get(id)
+        if not resource:
+            raise NotFound
+        authorized = auth.restricted_resource_show(
+            context, {'id': resource.get('id'), 'resource': resource}).get('success', False)
     if not authorized:
         return []
     else:
@@ -173,16 +177,25 @@ def _restricted_resource_list_hide_fields(context, resource_list):
                     else:
                         allowed_users.append(user[0:3] + '*****' + user[-2:])
 
-            new_restricted = json.dumps({
-                'level': restricted_dict.get("level"),
-                'allowed_users': ','.join(allowed_users)})
-            extras_restricted = resource.get('extras', {}).get('restricted', {})
-            if (extras_restricted):
-                restricted_resource['extras']['restricted'] = new_restricted
+            if isinstance(resource.get('restricted_allowed_users', None),str):
+                restricted_resource['restricted_allowed_users'] = allowed_users
+
+                # if the user is not authorized to see the resource, we hide
+                # all metadata apart from the format, id, and the name
+                # the id is renamed to 'restricted_id' so that unauthorized
+                # users cannot access the page to view the resource (see Readme)
+                if not authorized:
+                    for key in list(restricted_resource.keys()):
+                        if not key in ['format', 'name']:
+                            if key == 'id':
+                                id = restricted_resource.pop(key)
+                                restricted_resource['restricted_id'] = id
+                            else:
+                                restricted_resource.pop(key)
+                    restricted_resource['id'] = '.idnotauthorized'
 
             field_restricted_field = resource.get('restricted', {})
             if (field_restricted_field):
                 restricted_resource['restricted'] = new_restricted
-
         restricted_resources_list += [restricted_resource]
     return restricted_resources_list

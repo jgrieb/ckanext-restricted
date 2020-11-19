@@ -83,7 +83,7 @@ def restricted_request_access_form(package_id, resource_id, data=None, errors=No
             data['package_name'] = pkg.get('name')
             resources = pkg.get('resources', [])
             for resource in resources:
-                if resource['id'] == resource_id:
+                if resource['restricted_id'] == resource_id:
                     resource_name = resource['name']
                     break
             else:
@@ -160,6 +160,7 @@ def _send_request_mail(data):
             'reply-to': data.get('user_email')}
 
         # CC doesn't work and mailer cannot send to multiple addresses
+        import pdb; pdb.set_trace()
         for email, name in email_dict.items():
             mailer.mail_recipient(recipient_name=name, recipient_email=email, subject='Fwd: ' + subject, body=body,
                                   body_html=None, headers=headers)
@@ -176,7 +177,6 @@ def _send_request_mail(data):
             'Please find below a copy of the access '
             'request mail sent. \n\n >> {}'
         ).format(body.replace("\n", "\n >> "))
-
         mailer.mail_recipient(recipient_name=name, recipient_email=email, subject='Fwd: ' + subject, body=body_user,
                               body_html=None, headers=headers)
         success = True

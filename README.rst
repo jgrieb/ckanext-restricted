@@ -38,6 +38,10 @@ ckanext-restricted
 
 This is a variation of the original ckanext-restricted extension. It is for CKAN instances which do not use scheming, i.e., it removed the depepency of the original extension from ckanext-scheming, ckanext-repeating and ckanext-composite.
 
+A problem is that in the `CKAN source code <https://github.com/ckan/ckan/blob/024af5f82a468ebd39623d0aae04cbcfaabf536b/ckan/views/resource.py#L61>`_ only the 'package_show' action is called and not the 'resource_show', therefore the additional auth function for 'resource_show' does not get checked. Currently we circumvent this by removing the id from the resource which is checked in the CKAN source code so that an error is thrown. However, we need the ID for sending emails which is why we save it with another keyword.
+
+Original README:
+
 CKAN extension to restrict the accessibility to the resources of a dataset.
 This way the package metadata is accesible but not the data itself (resource).
 The resource access restriction level can be individualy defined for every package.
