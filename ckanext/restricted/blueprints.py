@@ -160,7 +160,6 @@ def _send_request_mail(data):
             'reply-to': data.get('user_email')}
 
         # CC doesn't work and mailer cannot send to multiple addresses
-        import pdb; pdb.set_trace()
         for email, name in email_dict.items():
             mailer.mail_recipient(recipient_name=name, recipient_email=email, subject='Fwd: ' + subject, body=body,
                                   body_html=None, headers=headers)
