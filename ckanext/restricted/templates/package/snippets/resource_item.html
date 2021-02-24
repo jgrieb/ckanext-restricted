@@ -15,7 +15,7 @@
     {{ super() }}
   {% else %}
   <span class="restricted-item">
-    <a class="heading restricted-item" disabled="true" href="#" title="{{ res.name or res.description }}">{{ _('Unauthorized') }}
+    <a class="heading restricted-item" disabled="true" href="#" title="{{ res.name or res.description }}">{{ _('Ressource not public, request permission from dataset contact (below)') }}
       <span class="format-label" property="dc:format" data-format="{{ res.format.lower() or 'data' }}">{{ res.format }}</span>
     </a>
   </span>
